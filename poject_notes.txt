@@ -1,0 +1,19 @@
+implementation of the game pong in rust using SDL2
+
+use sdl2 for windowing, graphics, and input handling
+
+general idea:
+-> initialize sdl2
+-> create window and set params
+-> initialize sprites(rects and font)
+-> start screen
+-> struct containing position of left and right paddles
+-> struct for ball
+-> trait for displayings the structs
+-> method on ball checking for collisions
+-> clamp of paddles and ball in the y axis
+-> score keeping can be contained in paddle structs (like p1 and p2)
+-> simple ai for right paddle
+-> 
+
+
