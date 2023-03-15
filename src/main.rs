@@ -10,7 +10,6 @@ use sdl2::ttf::Font;
 use std::time::Duration;
 use sdl2::rect::Rect;
 use sdl2::keyboard::Scancode;
-//use sdl2::render::TextureQuery;
 
 
 
@@ -29,7 +28,7 @@ fn main() {
     let texture_creator = canvas.texture_creator();
 
     let ttf_context = sdl2::ttf::init().map_err(|e| e.to_string()).expect("err has happened");
-    let mut font = ttf_context.load_font(Path::new("src/assets/fonts/elnath/ELNATH.ttf"), 100).expect("err has happened");
+    let mut font = ttf_context.load_font(Path::new("./assets/fonts/elnath/ELNATH.ttf"), 100).expect("could not open ttf file");
     font.set_style(sdl2::ttf::FontStyle::BOLD);
     
     let mut surface_score_1 = text_to_surface(&font, "0".to_string());
@@ -105,12 +104,12 @@ fn main() {
         }
 
         if ball.rect.x() <= 0{
-            ball.reset(ball_x, ball_y, -ball_speed);
+            ball.reset(ball_x, ball_y, ball_speed);
             score_p1 += 1;
             println!("player 1: {}", score_p1);
         }
         if ball.rect.x() >= width as i32{
-            ball.reset(ball_x, ball_y, ball_speed);
+            ball.reset(ball_x, ball_y, -ball_speed);
             score_p2 += 1;
             println!("player 2: {}", score_p2);
         }
@@ -194,7 +193,7 @@ impl Collide for Rect{
         let self_top = self.top();
         let self_bottom = self.bottom();
         if self_left <= rect_left.right() && self_left >= rect_left.left(){
-            if self_bottom > rect_left.top() && self_top < rect_left.bottom(){
+            if self_bottom >= rect_left.top() && self_top <= rect_left.bottom(){
                 let mid = (rect_left.top() + rect_left.bottom()) as f64 / 2.;
                 let res = ((self.y()as f64 - (self.height() as f64/2.))/mid) - 2.;
                 return Option::Some(res);
@@ -202,7 +201,7 @@ impl Collide for Rect{
             return Option::None;
 
         }else if self_right >= rect_right.left() && self_right <= rect_right.right(){
-            if self_bottom > rect_right.top() && self_top < rect_right.bottom(){
+            if self_bottom >= rect_right.top() && self_top <= rect_right.bottom(){
                 let mid = (rect_right.top() + rect_right.bottom()) as f64 / 2.;
                 let res = ((self.y()as f64 - (self.height() as f64/2.))/mid) - 2.;
                 return Option::Some(res);
