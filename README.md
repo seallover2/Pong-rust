@@ -7,5 +7,8 @@ Somewhat workable implementation of the famous game pong.
 
 [MIT](https://choosealicense.com/licenses/mit/)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/origin/master
 
